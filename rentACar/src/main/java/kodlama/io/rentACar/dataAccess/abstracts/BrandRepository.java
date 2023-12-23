@@ -6,13 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
-public interface BrandRepository extends JpaRepository<Brand, Integer> {
+public interface BrandRepository extends JpaRepository<Brand,Integer> {
     @Query("SELECT b FROM Brand b")
     List<Brand> getAll();
 
-    List<Brand> createBrand(List<Brand> brandList);
+    Brand save(Brand brand);
 
 
 }

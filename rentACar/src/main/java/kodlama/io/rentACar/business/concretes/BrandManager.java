@@ -1,32 +1,40 @@
 package kodlama.io.rentACar.business.concretes;
 
 import kodlama.io.rentACar.Models.Concretes.Brand;
+import kodlama.io.rentACar.Models.dto.BrandDto;
 import kodlama.io.rentACar.business.abstracts.BrandService;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import kodlama.io.rentACar.exception.CreateBrandException;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class BrandManager implements BrandService {
-    @Autowired
     private BrandRepository brandRepository;
 
     @Override
-    public List<Brand> getAll() {
+    public List<BrandDto> getAll() {
         //İs Kuralları
-        return brandRepository.getAll();
+        List<Brand> entities = brandRepository.getAll();
+        return entities.stream()
+                .map(entity -> new BrandDto(entity.getId(), entity.getName()))
+                .toList();
     }
 
     @Override
-    public List<Brand> createBrand(List<Brand> brandList) {
-        List<Brand> savedBrands = new ArrayList<>();
+    public void createBrand(BrandDto brandDto) throws CreateBrandException{
 
-        for (Brand brand : brandList) {
-            savedBrands.add(brandRepository.save(brand));
+        try {
+            Brand brand = brandDto.toEntity();
+            brandRepository.save(brand);
+        } catch (Exception e) {
+            log.info("Exception while creating brand {}", e.getLocalizedMessage());
+            throw new CreateBrandException(e);
         }
-        return savedBrands;
     }
 }

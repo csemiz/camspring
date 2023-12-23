@@ -1,6 +1,7 @@
 package kodlama.io.rentACar.Models.Concretes;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,14 +16,9 @@ import lombok.Setter;
 public class Brand {
 
     @Id
-    private int id;
+    @Positive
+    private Integer id;
     @Column(nullable = false)
     private String name;
 
-
- /*   @Override
-    public String toString() {
-        return "Tutorial [id=" + id + ", name=" + name + "]";
-    }
-*/
 }
