@@ -1,6 +1,7 @@
 package kodlama.io.rentACar.dataAccess.abstracts;
 
 import kodlama.io.rentACar.Models.Concretes.Brand;
+import kodlama.io.rentACar.Models.dto.BrandDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,8 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
     List<Brand> getAll();
 
     Brand save(Brand brand);
+    BrandDto getById(int id);
+    void deleteById(int id);
 
 
 }

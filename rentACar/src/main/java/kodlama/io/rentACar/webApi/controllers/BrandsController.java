@@ -23,6 +23,11 @@ public class BrandsController {
         return brandService.getAll();
     }
 
+    @GetMapping("/getById/{id}")
+    public BrandDto getById(@PathVariable int id)
+    {
+        return brandService.getById(id);
+    }
     @PostMapping("/postbrand")
     public ResponseEntity<BrandDto> createBrand(@RequestBody BrandDto brandDto) {
         try {
@@ -31,6 +36,21 @@ public class BrandsController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<BrandDto> updateBrand(@RequestBody BrandDto brandDto, @PathVariable int id)
+    {
+        try {
+            brandService.updateBrand(brandDto);
+            return new ResponseEntity<>(brandDto, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable int id) {
+        this.brandService.deleteById(id);
     }
 
 }
