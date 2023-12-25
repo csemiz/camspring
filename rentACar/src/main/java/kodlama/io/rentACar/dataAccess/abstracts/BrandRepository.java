@@ -13,7 +13,7 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
     List<Brand> getAll();
 
     Brand save(Brand brand);
-    BrandDto getById(int id);
+    Brand getById(int id);
     void deleteById(int id);
 
 

@@ -18,4 +18,11 @@ public class BrandDto {
         return brand;
     }
 
+    public static BrandDto fromEntity(Brand brand){
+        BrandDto brandDto=new BrandDto();
+        brandDto.setId(brand.getId());
+        brandDto.setName(brand.getName());
+        return brandDto;
+    }
+
 }

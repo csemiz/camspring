@@ -31,8 +31,8 @@ public class BrandManager implements BrandService {
 
     @Override
     public BrandDto getById(int id) {
-        BrandDto brandDto = brandRepository.getById(id);
-        return brandDto;
+        Brand brand=brandRepository.getById(id);
+        return BrandDto.fromEntity(brand);
 
     }
 
@@ -69,4 +69,10 @@ public class BrandManager implements BrandService {
         this.brandRepository.deleteById(id);
     }
 
+
 }
+
+
+
+
+

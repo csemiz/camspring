@@ -12,3 +12,4 @@ public interface BrandService {
     void updateBrand(BrandDto brand);
     void deleteById(int id);
 }
+

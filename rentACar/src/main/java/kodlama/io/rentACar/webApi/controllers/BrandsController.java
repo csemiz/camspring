@@ -24,10 +24,12 @@ public class BrandsController {
     }
 
     @GetMapping("/getById/{id}")
+    @ResponseBody
     public BrandDto getById(@PathVariable int id)
     {
         return brandService.getById(id);
     }
+
     @PostMapping("/postbrand")
     public ResponseEntity<BrandDto> createBrand(@RequestBody BrandDto brandDto) {
         try {
